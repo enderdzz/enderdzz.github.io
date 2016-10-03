@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="crypto," />
 
 
 
@@ -84,15 +84,18 @@
 
 
 
-<meta name="description" content="Foo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ender">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="0x01 题设这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动Haggis hurling，最后给出了一份源码：1234567891011121314151617#!/usr/bin/env python3import os, binascii, structfrom Crypto.Cipher import AESpad = lambda m: m + bytes([">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crypto100-haggis">
+<meta property="og:url" content="http://yoursite.com/2016/10/03/[crypto100]-haggis/index.html">
 <meta property="og:site_name" content="Ender">
-<meta property="og:description" content="Foo">
+<meta property="og:description" content="0x01 题设这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动Haggis hurling，最后给出了一份源码：1234567891011121314151617#!/usr/bin/env python3import os, binascii, structfrom Crypto.Cipher import AESpad = lambda m: m + bytes([">
+<meta property="og:image" content="http://yoursite.com/img/HAGGIS.png">
+<meta property="og:updated_time" content="2016-10-03T06:17:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ender">
-<meta name="twitter:description" content="Foo">
+<meta name="twitter:title" content="crypto100-haggis">
+<meta name="twitter:description" content="0x01 题设这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动Haggis hurling，最后给出了一份源码：1234567891011121314151617#!/usr/bin/env python3import os, binascii, structfrom Crypto.Cipher import AESpad = lambda m: m + bytes([">
+<meta name="twitter:image" content="http://yoursite.com/img/HAGGIS.png">
 
 
 
@@ -110,7 +113,7 @@
   };
 </script>
 
-  <title> Ender </title>
+  <title> crypto100-haggis | Ender </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -141,9 +144,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -230,9 +231,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -252,10 +253,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/10/03/[crypto100]-haggis/" itemprop="url">
-                  crypto100-haggis
-                </a>
+                crypto100-haggis
               
             
           </h1>
@@ -321,143 +319,62 @@
       
 
       
-        
-          
-            <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动<a href="https://en.wikipedia.org/wiki/Haggis_hurling" target="_blank" rel="external">Haggis hurling</a>，最后给出了一份源码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> os, binascii, struct</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">pad = <span class="keyword">lambda</span> m: m + bytes([<span class="number">16</span> - len(m) % <span class="number">16</span>] * (<span class="number">16</span> - len(m) % <span class="number">16</span>))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">haggis</span><span class="params">(m)</span>:</span></span><br><span class="line">    crypt0r = AES.new(bytes(<span class="number">0x10</span>), AES.MODE_CBC, bytes(<span class="number">0x10</span>))</span><br><span class="line">    <span class="keyword">return</span> crypt0r.encrypt(len(m).to_bytes(<span class="number">0x10</span>, <span class="string">'big'</span>) + pad(m))[<span class="number">-0x10</span>:]</span><br><span class="line"></span><br><span class="line">target = os.urandom(<span class="number">0x10</span>)</span><br><span class="line">print(binascii.hexlify(target).decode())</span><br><span class="line"></span><br><span class="line">msg = binascii.unhexlify(input())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> msg.startswith(<span class="string">b'I solemnly swear that I am up to no good.\0'</span>) \</span><br><span class="line">        <span class="keyword">and</span> haggis(msg) == target:</span><br><span class="line">    print(open(<span class="string">'flag.txt'</span>, <span class="string">'r'</span>).read().strip())</span><br></pre></td></tr></table></figure></p>
+        <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动<a href="https://en.wikipedia.org/wiki/Haggis_hurling" target="_blank" rel="external">Haggis hurling</a>，最后给出了一份源码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> os, binascii, struct</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">pad = <span class="keyword">lambda</span> m: m + bytes([<span class="number">16</span> - len(m) % <span class="number">16</span>] * (<span class="number">16</span> - len(m) % <span class="number">16</span>))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">haggis</span><span class="params">(m)</span>:</span></span><br><span class="line">    crypt0r = AES.new(bytes(<span class="number">0x10</span>), AES.MODE_CBC, bytes(<span class="number">0x10</span>))</span><br><span class="line">    <span class="keyword">return</span> crypt0r.encrypt(len(m).to_bytes(<span class="number">0x10</span>, <span class="string">'big'</span>) + pad(m))[<span class="number">-0x10</span>:]</span><br><span class="line"></span><br><span class="line">target = os.urandom(<span class="number">0x10</span>)</span><br><span class="line">print(binascii.hexlify(target).decode())</span><br><span class="line"></span><br><span class="line">msg = binascii.unhexlify(input())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> msg.startswith(<span class="string">b'I solemnly swear that I am up to no good.\0'</span>) \</span><br><span class="line">        <span class="keyword">and</span> haggis(msg) == target:</span><br><span class="line">    print(open(<span class="string">'flag.txt'</span>, <span class="string">'r'</span>).read().strip())</span><br></pre></td></tr></table></figure></p>
 <h2 id="0x02-write-up"><a href="#0x02-write-up" class="headerlink" title="0x02 write-up"></a>0x02 write-up</h2><p>从题目中可以看出在服务器端进行着两个判断:<br>一是对方发出的字符串<code>S</code>是否包含特定的前缀<code>pre</code>：<code>I solemnly swear that I am up to no good.\0</code>;<br>二是<code>S</code>经过一种特殊封包后的AES加密密文的后16位是否与服务器产生的16位随机字符<code>random</code>一致。<br>前者很容易就可以解决，后者需要对AES的加密方式有一定的了解才能完成任务。</p>
 <p>首先统计一下<code>pre</code>的字符串长度为<code>42bytes</code>，我们假定要在该<code>pre</code>后填充X个字符，那么填充过后信息    <code>M</code>的长度为$$len(M)=len(pre+X) =42+len(X)$$之后进入一个封包的过程：<br>前<code>0x10</code>字节采用大端序存储<code>M</code>的长度，之后为原始信息<code>M</code>，长度为len(M)，最后为<code>N</code>个填充字符<code>c</code>，具体计算公式为$$N = 16-len(M)(mod\;16)$$字符<code>c</code>的内容为$chr(16-len(M)(mod\; 16))$。<br>最终得到待加密原始明文<code>M&#39;</code>，长度为$$len(M’) = 16+len(M)+N$$将上边的内容一一带入可得：$$len(M’) = 16+42+len(X)+16-len(M)(mod\;16)$$<br>由于源码中没有对AES的填充规则进行设置，所以我这里猜测<code>M&#39;</code>的长度必须要为<code>key</code>即<code>(bytes(0x10))</code>整数倍，所以<code>X</code>可以取值为$6+16k,(k =0,1,2,…)$此时填充字符也就确定下来，为<code>16</code>位<code>0x10</code>，因此想要使它的加密结果为系统产生的<code>16</code>位随机字符<code>random</code>还需要借助前一个分组的帮助。<br>首先将确定<code>X</code>的长度，由于需要我们构造出一个新的分组，所以简便起见，我们选取<code>k=1</code>时的值即<code>6+16</code>，之后将前<code>6</code>字符我们可以随机填充，这样得到了前四个分组<code>16+42+6=64</code>进行AES加密<code>(key为bytes(0x10)iv为bytes(0x10))</code>，取出第四个分组加密后的16bytes密文称为<code>enc</code>，同时将<code>random</code>进行解密，<code>key</code>与<code>iv</code>都为<code>bytes(0x10)</code>,得到中间值<code>t_random</code>之后与<code>bytes(0x10)</code>即填充字符串进行异或得到<code>enc_last</code>,将其像<code>random</code>一样再一次进行AES解密，得到<code>t_enc_last</code>，那么我们构造的<code>16bytes</code>明文字符串<code>last</code>即为<br>$$last = t-enc-last \oplus enc$$<br>这样一来，整个字符串<code>M</code>已被我们构造出来。nc连接到服务端得到随机字符串<code>random</code>再将构造好的<code>M</code>转成16进制流输入，便可get到flag。<br><img src="/img/HAGGIS.png" alt="HAGGIS"></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/why/" itemprop="url">
-                  why
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T14:09:53+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/why/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/why/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/crypto/" rel="tag">#crypto</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>X3&amp;|* |V|0\/1^/6. 1’[V] 84[X!</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/why/" rel="next" title="why">
+                <i class="fa fa-chevron-left"></i> why
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -465,6 +382,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/03/[crypto100]-haggis/"
+           data-title="crypto100-haggis" data-url="http://yoursite.com/2016/10/03/[crypto100]-haggis/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -484,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/hoec.jpg"
@@ -535,6 +469,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-题设"><span class="nav-number">1.</span> <span class="nav-text">0x01 题设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-write-up"><span class="nav-number">2.</span> <span class="nav-text">0x02 write-up</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -631,6 +576,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
