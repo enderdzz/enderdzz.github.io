@@ -1,0 +1,679 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="reverse,pyc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="0x01 题设HitCon2016中最简单的逆向题，题目只给出了一份源码：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reverse50-handcrafted pyc">
+<meta property="og:url" content="http://yoursite.com/2016/10/11/handcraftedpyc/index.html">
+<meta property="og:site_name" content="Ender">
+<meta property="og:description" content="0x01 题设HitCon2016中最简单的逆向题，题目只给出了一份源码：">
+<meta property="og:updated_time" content="2016-10-11T04:52:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="reverse50-handcrafted pyc">
+<meta name="twitter:description" content="0x01 题设HitCon2016中最简单的逆向题，题目只给出了一份源码：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> reverse50-handcrafted pyc | Ender </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7c0911043e1e80ec7118aabf5ff5310d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ender</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">A Pure Maniac</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                reverse50-handcrafted pyc
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-11T12:45:26+08:00" content="2016-10-11">
+              2016-10-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Reverse/" itemprop="url" rel="index">
+                    <span itemprop="name">Reverse</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/11/handcraftedpyc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/handcraftedpyc/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>HitCon2016中最简单的逆向题，题目只给出了一份源码：</p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> marshal, zlib, base64</span><br><span class="line">exec(marshal.loads(zlib.decompress(base64.b64decode(<span class="string">'eJyNVktv00AQXm/eL0igiaFA01IO4cIVCUGFBBJwqRAckLhEIQmtRfPwI0QIeio/hRO/hJ/CiStH2M/prj07diGRP43Hs9+MZ2fWMxbnP6mux+oK9xVMHPFViLdCTB0xkeKDFEFfTIU4E8KZq8dCvB4UlN3hGEsdddXU9QTLv1eFiGKGM4cKUgsFCNLFH7dFrS9poayFYmIZm1b0gyqxMOwJaU3r6xs9sW1ooakXuRv+un7Q0sIlLVzOCZq/XtsK2oTSYaZlStogXi1HV0iazoN2CV2HZeXqRQ54TlJRb7FUlKyUatISsdzo+P7UU1Gb1POdMruckepGwk9tIXQTftz2yBaT5JQovWvpSa6poJPuqgao+b9l5Aj/R+mLQIP4f6Q8Vb3g/5TB/TJxWGdZr9EQrmn99fwKtTvAZGU7wzS7GNpZpDm2JgCrr8wrmPoo54UqGampFIeS9ojXjc4E2yI06bq/4DRoUAc0nVnng4k6p7Ks0+j/S8z9V+NZ5dhmrJUM/y7JTJeRtnJ2TSYJvsFq3CQt/vnfqmQXt5KlpuRcIvDAmhnn2E0t9BJ3SvB/SfLWhuOWNiNVZ+h28g4wlwUp00w95si43rZ3r6+fUIEdgOZbQAsyFRRvBR6dla8KCzRdslar7WS+a5HFb39peIAmG7uZTHVm17Czxju4m6bayz8e7J40DzqM0jr0bmv9PmPvk6y5z57HU8wdTDHeiUJvBMAM4+0CpoAZ4BPgJeAYEAHmgAUgAHiAj4AVAGORtwd4AVgC3gEmgBBwCPgMWANOAQ8AbwBHgHuAp4D3gLuARwoGmNUizF/j4yDC5BWM1kNvvlxFA8xikRrBxHIUhutFMBlgQoshhPphGAXe/OggKqqb2cibxwuEXjUcQjccxi5eFRL1fDSbKrUhy2CMb2aLyepkegDWsBwPlrVC0/kLHmeCBQ=='</span>))))</span><br></pre></td></tr></table></figure>
+<h2 id="0x02-write-up"><a href="#0x02-write-up" class="headerlink" title="0x02 write-up"></a>0x02 write-up</h2><p>这道最简单的题搞了我快一个下午，必须要写点什么…</p>
+<p>可以将这段base64解码再解压缩后的数据流打印出来看下是什么东西，发现大部分为乱码有少量的python关键字，结合题目标题猜测是pyc文件，也就是compiled后的py字节码文件，于是找来几个工具来disassemble/decompile byte-code，比如uncompyle2, pycdc, pychrysanthemum…总之我就用过这几个tools。</p>
+<p><code>f = open(&quot;crack.pyc&quot;, &#39;w&#39;)</code><br><code>f.write(zlib.decompress(base64.b64decode(XXXXX)))</code></p>
+<p>先用运行uncompyle2时，遇到“Unknown Magic Number”错误，根据<a href="http://www.mrt-prodz.com/blog/view/2014/09/no-con-name-ctf-quals-2014---immiscible-200pts-writeup" target="_blank" rel="external">这篇文章</a>的提示，填充pyc文件头格式的八个Bytes：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python</span><br><span class="line">&gt;&gt;&gt; import py_compile</span><br><span class="line">&gt;&gt;&gt; py_compile.compile(<span class="string">'crack.py'</span>)</span><br><span class="line">$ xxd <span class="_">-l</span> 16 crack.pyc</span><br><span class="line">$ head -c 8 crack.pyc &gt; newcrack.pyc</span><br><span class="line">$ cat crack.pyc &gt;&gt; newcrack.pyc</span><br></pre></td></tr></table></figure>
+<p>这次再运行uncompyle2脚本，还是报错，是在反编译时遇到了问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Syntax error at or near &apos;ROT_TWO&apos; token at offset 36</span><br></pre></td></tr></table></figure></p>
+<p>不过已经显示出了反汇编所有代码，用pychrysanthemum这个图形化界面Disassembler看的更舒服些：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">+ co_consts</span><br><span class="line">108: &lt;type &apos;int&apos;&gt;</span><br><span class="line">97: &lt;type &apos;int&apos;&gt;</span><br><span class="line">67: &lt;type &apos;int&apos;&gt;</span><br><span class="line">32: &lt;type &apos;int&apos;&gt;</span><br><span class="line">101: &lt;type &apos;int&apos;&gt;</span><br><span class="line">109: &lt;type &apos;int&apos;&gt;</span><br><span class="line">121: &lt;type &apos;int&apos;&gt;</span><br><span class="line">80: &lt;type &apos;int&apos;&gt;</span><br><span class="line">104: &lt;type &apos;int&apos;&gt;</span><br><span class="line">116: &lt;type &apos;int&apos;&gt;</span><br><span class="line">110: &lt;type &apos;int&apos;&gt;</span><br><span class="line">111: &lt;type &apos;int&apos;&gt;</span><br><span class="line">114: &lt;type &apos;int&apos;&gt;</span><br><span class="line">105: &lt;type &apos;int&apos;&gt;</span><br><span class="line">118: &lt;type &apos;int&apos;&gt;</span><br><span class="line">117: &lt;type &apos;int&apos;&gt;</span><br><span class="line">99: &lt;type &apos;int&apos;&gt;</span><br><span class="line">33: &lt;type &apos;int&apos;&gt;</span><br><span class="line">73: &lt;type &apos;int&apos;&gt;</span><br><span class="line">112: &lt;type &apos;int&apos;&gt;</span><br><span class="line">98: &lt;type &apos;int&apos;&gt;</span><br><span class="line">100: &lt;type &apos;int&apos;&gt;</span><br><span class="line">115: &lt;type &apos;int&apos;&gt;</span><br><span class="line">78: &lt;type &apos;int&apos;&gt;</span><br><span class="line">123: &lt;type &apos;int&apos;&gt;</span><br><span class="line">119: &lt;type &apos;int&apos;&gt;</span><br><span class="line">125: &lt;type &apos;int&apos;&gt;</span><br><span class="line">58: &lt;type &apos;int&apos;&gt;</span><br><span class="line">87: &lt;type &apos;int&apos;&gt;</span><br><span class="line">103: &lt;type &apos;int&apos;&gt;</span><br><span class="line">46: &lt;type &apos;int&apos;&gt;</span><br><span class="line">68: &lt;type &apos;int&apos;&gt;</span><br><span class="line">102: &lt;type &apos;int&apos;&gt;</span><br><span class="line">41: &lt;type &apos;int&apos;&gt;</span><br><span class="line">61: &lt;type &apos;int&apos;&gt;</span><br></pre></td></tr></table></figure>
+<p>将这些值chr一下，发现并没有什么规律= =<br>之后，再查看下反汇编代码发现某些指令规律（大多为LOAD_GLOBAL、LOAD_CONST与CALL_FUNCTION循环），同时又查了下ROT_TWO()和BINARY操作:</p>
+<blockquote>
+<p>ROT_TWO: swaps the two top-most stack items(From docs.python.org)</p>
+<p>Binary operations remove the top of the stack(TOS) and the second top-most stack item(TOS1) from the stack. They perform the opreation, and put the result back on the stack.</p>
+<p>BINARY_ADD Implements TOS = TOS1 + TOS</p>
+</blockquote>
+<p>猜测这些指令的目的是用来对可能是多个字符串的每个字符进行混淆操作再一一进行比较。</p>
+<p>后续我再具体用dis模块处理，分析下这个字节码文件所包含的各种信息。<br>于是我先把所有的反汇编的<a href="https://paste.ubuntu.com/23306715/" target="_blank" rel="external">所有代码</a>做下处理，保留下所有包含LOAD_CONST指令的代码行，再提取出每条指令调取的字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">file = open(<span class="string">"disass"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">	line = file.readline()</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> line:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">	<span class="keyword">if</span> <span class="string">"LOAD_CONST"</span> <span class="keyword">in</span> line:</span><br><span class="line">		PAT = re.compile(<span class="string">r"(\d+): &lt;type 'int'&gt;"</span>)</span><br><span class="line">		pat = PAT.search(line)</span><br><span class="line">		<span class="keyword">if</span> pat != <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">print</span> pat.group(<span class="number">1</span>)</span><br><span class="line"><span class="comment">#python solve.py &gt; solve</span></span><br></pre></td></tr></table></figure></p>
+<p>得到下列字符串：</p>
+<blockquote>
+<p>llaC em yP aht notriv lauhcamni !eac Ini npreterP tohty ntybdocese!!!ctihN{noy woc uoc naipmoa eldnur yP nnohttyb doceni euoy rb ria}!napwssro :dorWp gnssadrow…elP  esa yrtaga .ni oD tonurbf etecro)= .</p>
+</blockquote>
+<p>在中间部位可以发现8个有意思的字符：<br><code>ctihN{no</code></p>
+<p>如果以每四个字符进行翻转，便可以得到：<br><code>hitcon{N</code><br>于是可以写一个脚本处理下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">"ctihN&#123;noy woc uoc naipmoa eldnur yP nnohttyb doceni euoy rb ria&#125;!napwssro :dorWp gnssadrow...elP  esa yrtaga .ni oD tonurbf etecro)= "</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">s = <span class="string">""</span></span><br><span class="line"><span class="keyword">while</span> i &lt; len(string):</span><br><span class="line">	sub = string[i:i+<span class="number">4</span>]</span><br><span class="line">	s = s+sub[::<span class="number">-1</span>]</span><br><span class="line">	i += <span class="number">4</span></span><br><span class="line"><span class="keyword">print</span> s</span><br></pre></td></tr></table></figure></p>
+<p>得到</p>
+<blockquote>
+<p>hitcon{Now you can compile arund Py honnbyttcod  ineyoue br }airpan!rsswd: opWrosng rdas..woPle.se  ry aagatin.  Do unot fbrcete=)or</p>
+</blockquote>
+<p>当时以为这就是Flag= =<br>发现后边是乱码，但是可以猜测出来：</p>
+<blockquote>
+<p>hitcon{Now you can compile and run Python bytecode in your brain.}</p>
+</blockquote>
+<p>未完待续…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/reverse/" rel="tag">#reverse</a>
+          
+            <a href="/tags/pyc/" rel="tag">#pyc</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/[crypto100]-haggis/" rel="next" title="crypto100-haggis">
+                <i class="fa fa-chevron-left"></i> crypto100-haggis
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/11/handcraftedpyc/"
+           data-title="reverse50-handcrafted pyc" data-url="http://yoursite.com/2016/10/11/handcraftedpyc/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/hoec.jpg"
+               alt="No title" />
+          <p class="site-author-name" itemprop="name">No title</p>
+          <p class="site-description motion-element" itemprop="description">Foo</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-题设"><span class="nav-number">1.</span> <span class="nav-text">0x01 题设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-write-up"><span class="nav-number">2.</span> <span class="nav-text">0x02 write-up</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">No title</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"man1ac"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
