@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="crypto,RSA," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="Foo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ender">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="0x01 题设题目描述:PE182-中文翻译站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project Euler No.182">
+<meta property="og:url" content="http://yoursite.com/2016/11/10/pe182/index.html">
 <meta property="og:site_name" content="Ender">
-<meta property="og:description" content="Foo">
+<meta property="og:description" content="0x01 题设题目描述:PE182-中文翻译站">
+<meta property="og:updated_time" content="2016-11-10T01:59:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ender">
-<meta name="twitter:description" content="Foo">
+<meta name="twitter:title" content="Project Euler No.182">
+<meta name="twitter:description" content="0x01 题设题目描述:PE182-中文翻译站">
 
 
 
@@ -110,7 +111,7 @@
   };
 </script>
 
-  <title> Ender </title>
+  <title> Project Euler No.182 | Ender </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -141,9 +142,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,9 +249,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -272,10 +271,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/11/10/pe182/" itemprop="url">
-                  Project Euler No.182
-                </a>
+                Project Euler No.182
               
             
           </h1>
@@ -341,406 +337,100 @@
       
 
       
-        
-          <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>题目描述:<br><a href="http://pe-cn.github.io/182/">PE182-中文翻译站</a></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/10/pe182/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+        <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>题目描述:<br><a href="http://pe-cn.github.io/182/" target="_blank" rel="external">PE182-中文翻译站</a></p>
+<a id="more"></a>
+<h2 id="0x02-Solution"><a href="#0x02-Solution" class="headerlink" title="0x02 Solution"></a>0x02 Solution</h2><p>首先我们先去遍历可能的( $(e, \phi(N))=1$ )的所有e，然后借助于一条很好的结论来统计所有符合要求的e，并进行累加，最后得到的就是答案。</p>
+<p>什么结论呢？</p>
+<blockquote>
+<p>Thm.1<br>如果这种(e,m)符合$m\equiv m^{e}(mod\; N)$，我们称之为一个暴露组合，那么在e固定的情况下，暴露组合的个数为:$[1+(p-1, e-1)]*[1+(q-1,e-1)]$<br>（这里的p,q为N的两个素因子）</p>
+</blockquote>
+<p>接下来给出的，就是这条结论的证明过程</p>
+<p>这里要用到数论中有关同余与原根的一些理论</p>
+<blockquote>
+<p>Thm.2<br>$$\forall 1\le i \le n,a \equiv b(mod \; m_{i}) \Leftrightarrow a\equiv b(mod \; [m_{1},m_{2},…,m_{n}])$$<br>Thm.3<br>若$(a, m)=1$，则 $1=a^{0},a^{1},…,a^{ord_{m}(a)-1}$ 这 $ord_{m}(a)$ 个数模m两两不同余。特别地，当a是模m的原根( $ord_{m}(a)=\phi(m)$ )时，这$\phi(m)$个数是模m的一个既约剩余系。(注意：m不一定为素数,a一般选取为模m的一个既约剩余系。)</p>
+</blockquote>
+<p>现在，我们假设g为N的一个原根，也可以称之为生成元，对于任意一个在模p的既约同余系中的整数，都有存在一个x使得$g^x \equiv m(mod\;p)$。</p>
+<p>而且$m\equiv m^{e}(mod\; N)$可以根据<strong>Thm.2</strong>转换成下列同余方程组:</p>
+<p>$$m\equiv m^{e}(mod\; p)-(1)$$<br>$$m\equiv m^{e}(mod\; q)-(2)$$</p>
+<p>只讨论式(1)，式(2)同理：</p>
+<p>将m用$g^x$进行替换</p>
+<p>$$(g^x)^e \equiv  g^x(mod\; p)$$<br>$$g^{xe}  \equiv g^x(mod\; p)$$<br>$$xe      \equiv x(mod\; \phi(p))$$<br>$$xe      \equiv x(mod\; p-1)$$<br>$$x(e-1)  \equiv 0(mod\; p-1)-(3)$$</p>
+<blockquote>
+<p>引理1:<br>同余方程$ax\equiv b(mod\; n)$有解当且仅当$(a, n)|b$<br>引理2:<br>同余方程$ax\equiv b(mod\; n)$<strong>在模n的意义下</strong>有$d=(a,n)$个解或者无解。</p>
+</blockquote>
+<p>这两条引理证明之后给出= =</p>
+<p>不过有一点很显然的是，对于每一个方程，都至少存在三个解，<br>理由如下（以p为例）：</p>
+<p>因为$\phi(N)$为偶数，那么e必为奇数，e-1为偶数，又p-1为偶数，所以二者的最大公约数至少为2，最后再加1为3。</p>
+<p>一般会为哪三个必存在的解呢？</p>
+<p>Ans: <code>0</code>,<code>1</code>,<code>p-1|q-1|N-1</code></p>
+<p>对于第三个解存在性的证明，相当于证$(X-1)^{2k+1}(mod\; X)\equiv (X-1)\;(k=1,2,3,…) $<br><strong>切记：$m\equiv m^{e}(mod\; N) \nLeftrightarrow 1\equiv m^{e-1}(mod\; N)$ </strong></p>
+<p>请再次注意引理2，为什么是在模n的意义下，结合下文，一般情况下，<code>0</code>,<code>1</code>都是暴露组合的解，显而易见，<code>p-1</code>也是，但在这里模数是<code>p-1</code>所以，式(3)的解数为$(e-1,p-1)+1$.</p>
+<p>不妨定义<code>Ans(p)</code>,<code>Ans(q)</code>如下：</p>
+<p>\begin{cases}<br>Ans(p)=1+(e-1, p-1)\<br>Ans(q)=1+(e-1, q-1)<br>\end{cases}</p>
+<p>那么接下来便是合并计算个数的问题，或者可以说是一个从模p(或q)的剩余系映射到模N的剩余系中，求解暴露组合的个数。</p>
+<p>这里就要引用中国剩余定理(CRT)来解决：</p>
+<blockquote>
+<p>引理3: 同余方程组中子方程解的个数的乘积为该同余方程组的解的个数</p>
+</blockquote>
+<p>具体证明见参看内容[1].本人之后会补充= =</p>
+<p>因此答案为：<br>$$Ans(N)=Ans(p)*Ans(q)$$</p>
+<p>参考内容:<br>[1]. Messages  which equal their encryptions. – <a href="http://web.mit.edu/6.857/OldStuff/Fall97/handouts/H11-sol3.pdf" target="_blank" rel="external">Solutions to Problem Set 3</a><br>[2]. Handbook of Applied Cryptography p.290</p>
+<p>有时间可以去阅读另外一篇文章,与本题关系不是很大，但很有意思：<br><a href="http://www.matrix67.com/blog/archives/5100" target="_blank" rel="external">跨越千年的RSA算法</a></p>
+
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/11/handcraftedpyc/" itemprop="url">
-                  reverse50-handcrafted pyc
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T12:45:26+08:00" content="2016-10-11">
-              2016-10-11
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Reverse/" itemprop="url" rel="index">
-                    <span itemprop="name">Reverse</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/crypto/" rel="tag">#crypto</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/11/handcraftedpyc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/handcraftedpyc/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/RSA/" rel="tag">#RSA</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>HitCon2016中最简单的逆向题，题目只给出了一份源码：</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/11/handcraftedpyc/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/11/handcraftedpyc/" rel="next" title="reverse50-handcrafted pyc">
+                <i class="fa fa-chevron-left"></i> reverse50-handcrafted pyc
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/03/[crypto100]-haggis/" itemprop="url">
-                  crypto100-haggis
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-03T13:59:12+08:00" content="2016-10-03">
-              2016-10-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Crypto/" itemprop="url" rel="index">
-                    <span itemprop="name">Crypto</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/03/[crypto100]-haggis/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/03/[crypto100]-haggis/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="0x01-题设"><a href="#0x01-题设" class="headerlink" title="0x01 题设"></a>0x01 题设</h2><p>这是来自慕尼黑工业大学的一场CTF，题干没有什么卵用，介绍了一种很奇葩的运动<a href="https://en.wikipedia.org/wiki/Haggis_hurling">Haggis hurling</a>，最后给出了一份源码：<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/03/[crypto100]-haggis/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/why/" itemprop="url">
-                  we1c0me
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T14:09:53+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/welcome/" itemprop="url" rel="index">
-                    <span itemprop="name">welcome</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/why/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/why/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>X3&amp;|* |V|0\/1^/6. 1’[V] 84[X!</p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -748,6 +438,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/10/pe182/"
+           data-title="Project Euler No.182" data-url="http://yoursite.com/2016/11/10/pe182/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -767,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/hoec.jpg"
@@ -829,6 +536,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-题设"><span class="nav-number">1.</span> <span class="nav-text">0x01 题设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Solution"><span class="nav-number">2.</span> <span class="nav-text">0x02 Solution</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -925,6 +643,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
