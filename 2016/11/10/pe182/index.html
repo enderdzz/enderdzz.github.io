@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/10/pe182/index.html">
 <meta property="og:site_name" content="Ender">
 <meta property="og:description" content="0x01 题设题目描述:PE182-中文翻译站">
-<meta property="og:updated_time" content="2016-11-10T01:59:31.000Z">
+<meta property="og:updated_time" content="2016-11-12T17:20:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project Euler No.182">
 <meta name="twitter:description" content="0x01 题设题目描述:PE182-中文翻译站">
@@ -358,7 +358,11 @@
 <blockquote>
 <p>引理1:<br>同余方程$ax\equiv b(mod\; n)$有解当且仅当$(a, n)|b$<br>引理2:<br>同余方程$ax\equiv b(mod\; n)$<strong>在模n的意义下</strong>有$d=(a,n)$个解或者无解。</p>
 </blockquote>
-<p>这两条引理证明之后给出= =</p>
+<p><del>这两条引理证明之后给出= =</del></p>
+<ol>
+<li>对于引理1的证明，假定$(a,n)=x’,a=rx’,n=sx’$,<br>那么原方程变为$rx’x\equiv b(mod\; sx’)$，如果x’不等于1，那么a不会存在模n逆元，只有当b也为x’的倍数时，等式两边可以同时约去x’,使得该方程有解。</li>
+<li>对于引理2的证明，参考这里给出的一篇博文[<a href="http://blog.csdn.net/muscwan/article/details/8503891" target="_blank" rel="external">线性同余方程解的特点及其一般求解方法</a>]</li>
+</ol>
 <p>不过有一点很显然的是，对于每一个方程，都至少存在三个解，<br>理由如下（以p为例）：</p>
 <p>因为$\phi(N)$为偶数，那么e必为奇数，e-1为偶数，又p-1为偶数，所以二者的最大公约数至少为2，最后再加1为3。</p>
 <p>一般会为哪三个必存在的解呢？</p>
@@ -372,8 +376,9 @@
 <blockquote>
 <p>引理3: 同余方程组中子方程解的个数的乘积为该同余方程组的解的个数</p>
 </blockquote>
-<p>具体证明见参看内容[1].本人之后会补充= =</p>
-<p>因此答案为：<br>$$Ans(N)=Ans(p)*Ans(q)$$</p>
+<p>具体引理3见参看内容[1].<del>本人之后会补充= =</del><br>To see the lemma3, you still have to look through <a href="http://www.math.uconn.edu/~kconrad/blurbs/ugradnumthy/crt.pdf" target="_blank" rel="external">another paper</a></p>
+<p>在这里的Theorem4.4中作者讲到了在二次剩余方程组下的解的个数的问题，构成方程组的两个方程的解个数的乘积为方程组解的个数，并给出了证明。</p>
+<p>Finally, 答案为：<br>$$Ans(N)=Ans(p)*Ans(q)$$</p>
 <p>参考内容:<br>[1]. Messages  which equal their encryptions. – <a href="http://web.mit.edu/6.857/OldStuff/Fall97/handouts/H11-sol3.pdf" target="_blank" rel="external">Solutions to Problem Set 3</a><br>[2]. Handbook of Applied Cryptography p.290</p>
 <p>有时间可以去阅读另外一篇文章,与本题关系不是很大，但很有意思：<br><a href="http://www.matrix67.com/blog/archives/5100" target="_blank" rel="external">跨越千年的RSA算法</a></p>
 
